@@ -10,16 +10,16 @@ public class Publicacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column(name = "titulo", nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(name = "titulo", nullable = false)
     private String titulo;
 
-    @Column(name = "titulo", nullable = false)
+    @Column(name = "descripcion", nullable = false)
     private String descripcion;
 
-    @Column(name = "titulo", nullable = false)
+    @Column(name = "contenido", nullable = false)
     private String contenido;
 
     public Publicacion() {
