@@ -41,6 +41,27 @@ public class PublicacionServiceImpl implements PublicacionService{
         return mapearDTO(publicacion);
     }
 
+    @Override
+    public PublicacionDto actualizarPublicacion(PublicacionDto publicacionDto, Long id) {
+        Publicacion publicacion = publicacionRepository.findById(id).
+                orElseThrow(()-> new ResourceNotFoundException("Publicacion", "id", id));
+
+        publicacion.setTitulo(publicacionDto.getTitulo());
+        publicacion.setDescripcion(publicacionDto.getDescripcion());
+        publicacion.setContenido(publicacionDto.getContenido());
+
+        Publicacion publiActualizada = publicacionRepository.save(publicacion);
+        return mapearDTO(publiActualizada);
+    }
+
+    @Override
+    public void eliminarPublicacion(Long id) {
+        Publicacion publicacion = publicacionRepository.findById(id).
+                orElseThrow(()-> new ResourceNotFoundException("Publicacion", "id", id));
+        publicacionRepository.delete(publicacion);
+
+    }
+
     //Convierte Entidad a DTO
     private PublicacionDto mapearDTO(Publicacion publicacion){
         PublicacionDto publicacionDto = new PublicacionDto();

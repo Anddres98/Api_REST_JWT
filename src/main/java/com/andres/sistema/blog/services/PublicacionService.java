@@ -7,9 +7,11 @@ import java.util.List;
 public interface PublicacionService {
 
     public PublicacionDto crearPublicacion(PublicacionDto publicacionDto);
-    public List<PublicacionDto> obtenerTodasLasPublicaciones();
+    public List<PublicacionDto> obtenerTodasLasPublicaciones(int numeroPagina, int medidaPagina);
 
     public PublicacionDto obtenerPublicacionPorId(Long id);
 
-    public PublicacionDto actualizarPublicacion
+    public PublicacionDto actualizarPublicacion(PublicacionDto publicacionDto, Long id);
+
+    public void eliminarPublicacion(Long id);
 }
