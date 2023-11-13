@@ -3,6 +3,7 @@ package com.andres.sistema.blog.controllers;
 import com.andres.sistema.blog.dto.PublicacionDto;
 import com.andres.sistema.blog.dto.PublicacionRespuesta;
 import com.andres.sistema.blog.services.PublicacionService;
+import com.andres.sistema.blog.utility.AppConstantes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +21,11 @@ public class PublicacionController {
 
     @GetMapping
     public PublicacionRespuesta listarPublicaciones(
-            @RequestParam(value = "pageNumber", defaultValue = "0", required = false) int numeroPagina,
-            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int medidaPagina){
-        return publicacionService.obtenerTodasLasPublicaciones(numeroPagina, medidaPagina);
+            @RequestParam(value = "pageNumber", defaultValue = AppConstantes.NUMERO_DE_PAGINA_POR_DEFECTO, required = false) int numeroPagina,
+            @RequestParam(value = "pageSize", defaultValue = AppConstantes.MEDIDA_DE_PAGINA_POR_DEFECTO, required = false) int medidaPagina,
+            @RequestParam(value = "sortBy", defaultValue = AppConstantes.ORDENAR_POR_DEFECTO, required = false) String ordenarPor,
+            @RequestParam(value = "sortDir", defaultValue = AppConstantes.ORDENAR_DIRECCION_POR_DEFECTO, required = false) String sortDir){
+        return publicacionService.obtenerTodasLasPublicaciones(numeroPagina, medidaPagina, ordenarPor, sortDir  );
     }
 
     @GetMapping("/{id}")

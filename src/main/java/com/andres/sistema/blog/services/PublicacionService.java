@@ -7,7 +7,7 @@ import com.andres.sistema.blog.dto.PublicacionRespuesta;
 public interface PublicacionService {
 
     public PublicacionDto crearPublicacion(PublicacionDto publicacionDto);
-    public PublicacionRespuesta obtenerTodasLasPublicaciones(int numeroPagina, int medidaPagina);
+    public PublicacionRespuesta obtenerTodasLasPublicaciones(int numeroPagina, int medidaPagina, String ordenarPor, String sortDir);
 
     public PublicacionDto obtenerPublicacionPorId(Long id);
 
