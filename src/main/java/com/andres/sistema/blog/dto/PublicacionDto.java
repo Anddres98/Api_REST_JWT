@@ -5,13 +5,13 @@ public class PublicacionDto {
     private Long id;
     private String titulo;
     private String descripcion;
-    private String cotenido;
+    private String contenido;
 
     public PublicacionDto(Long id, String titulo, String descripcion, String cotenido) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.cotenido = cotenido;
+        this.contenido = cotenido;
     }
 
     public PublicacionDto() {
@@ -41,11 +41,11 @@ public class PublicacionDto {
         this.descripcion = descripcion;
     }
 
-    public String getCotenido() {
-        return cotenido;
+    public String getContenido() {
+        return contenido;
     }
 
-    public void setCotenido(String cotenido) {
-        this.cotenido = cotenido;
+    public void setContenido(String cotenido) {
+        this.contenido = cotenido;
     }
 }
