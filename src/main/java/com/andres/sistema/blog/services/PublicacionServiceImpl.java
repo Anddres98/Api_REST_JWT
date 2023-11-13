@@ -1,10 +1,14 @@
 package com.andres.sistema.blog.services;
 
 import com.andres.sistema.blog.dto.PublicacionDto;
+import com.andres.sistema.blog.dto.PublicacionRespuesta;
 import com.andres.sistema.blog.entitys.Publicacion;
 import com.andres.sistema.blog.exeptions.ResourceNotFoundException;
 import com.andres.sistema.blog.repository.PublicacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,9 +33,22 @@ public class PublicacionServiceImpl implements PublicacionService{
     }
 
     @Override
-    public List<PublicacionDto> obtenerTodasLasPublicaciones() {
-        List<Publicacion> publicaciones = publicacionRepository.findAll();
-        return publicaciones.stream().map(this::mapearDTO).collect(Collectors.toList());
+    public PublicacionRespuesta obtenerTodasLasPublicaciones(int numeroPagina, int medidaPagina) {
+        Pageable pageable = PageRequest.of(numeroPagina, medidaPagina);
+        Page<Publicacion> publicaciones = publicacionRepository.findAll(pageable);
+
+        List<Publicacion> listaDePublicaciones = publicaciones.getContent();
+        List<PublicacionDto> contenido = listaDePublicaciones.stream().map(this::mapearDTO).toList();
+
+        PublicacionRespuesta publicacionRespuesta = new PublicacionRespuesta();
+        publicacionRespuesta.setContenido(contenido);
+        publicacionRespuesta.setNumeroDePagina(publicaciones.getNumber());
+        publicacionRespuesta.setMedidaDePagina(publicaciones.getSize());
+        publicacionRespuesta.setTotalElemento(publicaciones.getTotalElements());
+        publicacionRespuesta.setTotalPaginas(publicaciones.getTotalPages());
+        publicacionRespuesta.setUltima(publicaciones.isLast());
+
+        return publicacionRespuesta;
     }
 
     @Override

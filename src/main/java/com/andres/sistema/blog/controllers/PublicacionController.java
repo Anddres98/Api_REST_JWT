@@ -1,14 +1,14 @@
 package com.andres.sistema.blog.controllers;
 
 import com.andres.sistema.blog.dto.PublicacionDto;
+import com.andres.sistema.blog.dto.PublicacionRespuesta;
 import com.andres.sistema.blog.services.PublicacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/publicaciones")
@@ -19,10 +19,10 @@ public class PublicacionController {
 
 
     @GetMapping
-    public List<PublicacionDto> listarPublicaciones(
+    public PublicacionRespuesta listarPublicaciones(
             @RequestParam(value = "pageNumber", defaultValue = "0", required = false) int numeroPagina,
             @RequestParam(value = "pageSize", defaultValue = "10", required = false) int medidaPagina){
-        return publicacionService.obtenerTodasLasPublicaciones();
+        return publicacionService.obtenerTodasLasPublicaciones(numeroPagina, medidaPagina);
     }
 
     @GetMapping("/{id}")
