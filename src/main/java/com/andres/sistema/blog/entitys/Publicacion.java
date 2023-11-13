@@ -3,6 +3,8 @@ package com.andres.sistema.blog.entitys;
 import jakarta.persistence.*;
 
 import javax.annotation.processing.Generated;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "publicaciones", uniqueConstraints = {@UniqueConstraint(columnNames = {"titulo"})})
@@ -21,6 +23,10 @@ public class Publicacion {
 
     @Column(name = "contenido", nullable = false)
     private String contenido;
+
+    //el orphanRemoval la instacia de direccion se elimina automaticamente, cada que ves elimines un valor se elimina datos relacionados
+    @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Comentario> comentarios = new HashSet<>();
 
     public Publicacion() {
     }
