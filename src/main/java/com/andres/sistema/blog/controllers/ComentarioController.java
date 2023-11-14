@@ -32,9 +32,19 @@ public class ComentarioController {
 
     @GetMapping("publicaciones/{publicacionId}/comentarios/{id}")
     public ResponseEntity<ComentarioDto> obtenerComentarioPorId(
-            @PathVariable(value = "pubalicionId") Long publicacionId,
-            @PathVariable(value = "id") Long comentarioId){
+            @PathVariable(value = "publicacionId") long publicacionId,
+            @PathVariable(value = "id") long comentarioId){
         ComentarioDto comentarioDto = comentarioService.obtenerComentarioPorId(publicacionId, comentarioId);
         return new ResponseEntity<>(comentarioDto, HttpStatus.OK);
     }
+
+    @PutMapping("publicaciones/{publicacionId}/comentarios/{id}")
+    public ResponseEntity<ComentarioDto> actualizarComentario(
+            @PathVariable(value = "publicacionId") long publicacionId,
+            @PathVariable(value = "id") long comentarioId,
+            @RequestBody ComentarioDto comentarioDto){
+        ComentarioDto comentarioActualizado = comentarioService.actualizarComentario(publicacionId, comentarioId, comentarioDto);
+        return new ResponseEntity<>(comentarioActualizado, HttpStatus.OK);
+    }
+
 }
