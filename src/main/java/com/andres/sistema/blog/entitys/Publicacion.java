@@ -1,5 +1,6 @@
 package com.andres.sistema.blog.entitys;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import javax.annotation.processing.Generated;
@@ -25,6 +26,8 @@ public class Publicacion {
     private String contenido;
 
     //el orphanRemoval la instacia de direccion se elimina automaticamente, cada que ves elimines un valor se elimina datos relacionados
+    //El JsonBackReference sirve para romper la recursion infinita, ignora cuando se serialice
+    @JsonBackReference
     @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Comentario> comentarios = new HashSet<>();
 
@@ -68,5 +71,13 @@ public class Publicacion {
 
     public void setContenido(String contenido) {
         this.contenido = contenido;
+    }
+
+    public Set<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(Set<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 }
