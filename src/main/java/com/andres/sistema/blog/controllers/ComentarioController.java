@@ -3,6 +3,7 @@ package com.andres.sistema.blog.controllers;
 import com.andres.sistema.blog.dto.ComentarioDto;
 import com.andres.sistema.blog.entitys.Comentario;
 import com.andres.sistema.blog.services.ComentarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class ComentarioController {
     @PostMapping("publicaciones/{publicacionId}/comentarios")
     public ResponseEntity<ComentarioDto> guardarComentario(
             @PathVariable(value = "publicacionId") Long publicacionId,
-            @RequestBody ComentarioDto comentarioDto){
+            @Valid @RequestBody ComentarioDto comentarioDto){
         return new ResponseEntity<>(comentarioService.crearComentario(publicacionId, comentarioDto), HttpStatus.CREATED);
     }
 
@@ -42,7 +43,7 @@ public class ComentarioController {
     public ResponseEntity<ComentarioDto> actualizarComentario(
             @PathVariable(value = "publicacionId") long publicacionId,
             @PathVariable(value = "id") long comentarioId,
-            @RequestBody ComentarioDto comentarioDto){
+            @Valid @RequestBody ComentarioDto comentarioDto){
         ComentarioDto comentarioActualizado = comentarioService.actualizarComentario(publicacionId, comentarioId, comentarioDto);
         return new ResponseEntity<>(comentarioActualizado, HttpStatus.OK);
     }

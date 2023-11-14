@@ -42,8 +42,7 @@ public class PublicacionController {
 
     @PutMapping("/{id}")
     public ResponseEntity<PublicacionDto> actualizarPublicacion(
-            @Valid
-            @RequestBody PublicacionDto publicacionDto,
+            @Valid @RequestBody PublicacionDto publicacionDto,
             @PathVariable(name = "id") Long id){
         PublicacionDto publicacionRespuesta = publicacionService.actualizarPublicacion(publicacionDto, id);
         return new ResponseEntity<>(publicacionRespuesta, HttpStatus.OK);
