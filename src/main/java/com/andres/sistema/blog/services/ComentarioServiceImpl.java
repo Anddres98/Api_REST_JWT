@@ -1,14 +1,12 @@
 package com.andres.sistema.blog.services;
 
 import com.andres.sistema.blog.dto.ComentarioDto;
-import com.andres.sistema.blog.dto.PublicacionDto;
 import com.andres.sistema.blog.entitys.Comentario;
 import com.andres.sistema.blog.entitys.Publicacion;
 import com.andres.sistema.blog.exeptions.BlogAppException;
 import com.andres.sistema.blog.exeptions.ResourceNotFoundException;
 import com.andres.sistema.blog.repository.ComentarioRepository;
 import com.andres.sistema.blog.repository.PublicacionRepository;
-import org.hibernate.validator.internal.util.privilegedactions.NewInstance;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
