@@ -9,6 +9,7 @@ import com.andres.sistema.blog.exeptions.ResourceNotFoundException;
 import com.andres.sistema.blog.repository.ComentarioRepository;
 import com.andres.sistema.blog.repository.PublicacionRepository;
 import org.hibernate.validator.internal.util.privilegedactions.NewInstance;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class ComentarioServiceImpl implements ComentarioService{
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Autowired
     private ComentarioRepository comentarioRepository;
@@ -93,22 +97,12 @@ public class ComentarioServiceImpl implements ComentarioService{
     }
 
     private ComentarioDto mapearDTO(Comentario comentario){
-        ComentarioDto comentarioDto = new ComentarioDto();
-        comentarioDto.setId(comentario.getId());
-        comentarioDto.setEmail(comentario.getEmail());
-        comentarioDto.setNombre(comentario.getNombre());
-        comentarioDto.setContenidoDelMensaje(comentario.getContenidoDelMensaje());
 
-        return comentarioDto;
+        return modelMapper.map(comentario, ComentarioDto.class);
     }
 
     private Comentario mapearEntidad(ComentarioDto comentarioDto){
-        Comentario comentario = new Comentario();
-        comentario.setId((comentarioDto.getId()));
-        comentario.setNombre(comentarioDto.getNombre());
-        comentario.setEmail(comentarioDto.getEmail());
-        comentario.setContenidoDelMensaje(comentarioDto.getContenidoDelMensaje());
 
-        return comentario;
+        return modelMapper.map(comentarioDto, Comentario.class);
     }
 }

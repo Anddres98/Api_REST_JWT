@@ -47,4 +47,12 @@ public class ComentarioController {
         return new ResponseEntity<>(comentarioActualizado, HttpStatus.OK);
     }
 
+    @DeleteMapping("publicaciones/{publicacionId}/comentarios/{id}")
+    public ResponseEntity<String> eliminarComentario(
+            @PathVariable(value = "publicacionId") long publicacionId,
+            @PathVariable(value = "id") long comentarioId){
+        comentarioService.eliminarComentario(publicacionId, comentarioId);
+        return new ResponseEntity<>("Comentario eliminado con exito", HttpStatus.OK);
+    }
+
 }
