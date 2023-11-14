@@ -89,13 +89,11 @@ public class PublicacionServiceImpl implements PublicacionService{
 
     //Convierte Entidad a DTO
     private PublicacionDto mapearDTO(Publicacion publicacion){
-        PublicacionDto publicacionDto = modelMapper.map(publicacion, PublicacionDto.class);
-        return publicacionDto;
+        return modelMapper.map(publicacion, PublicacionDto.class);
     }
 
     //Convierte de DTO a Entidad
     private Publicacion mapearEntidad(PublicacionDto publicacionDto){
-        Publicacion publicacion = modelMapper.map(publicacionDto, Publicacion.class);
-        return publicacion;
+        return modelMapper.map(publicacionDto, Publicacion.class);
     }
 }

@@ -1,14 +1,22 @@
 package com.andres.sistema.blog.dto;
 
 import com.andres.sistema.blog.entitys.Comentario;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 import java.util.Set;
 
 public class PublicacionDto {
 
+
     private Long id;
+    @NotEmpty
+    @Size(min = 2, message = "El titulo de la publicación deberia tener al menos 2 caracteres")
     private String titulo;
+    @NotEmpty
+    @Size(min= 10, message = "La descripcion de la publicacion deberia tener al menos 10 caracteres")
     private String descripcion;
+
     private String contenido;
 
     private Set<Comentario> comentarios;
